@@ -27,7 +27,6 @@ var trash_bin_node: Node2D = null
 # Diegetic Brass Odometer Plate
 @onready var brass_plate: Polygon2D = $BrassCounterPlate
 @onready var brass_counter_label: Label = $BrassCounterPlate/CounterLabel
-@onready var brass_record_label: Label = $BrassCounterPlate/RecordLabel
 @onready var coffee_buff_badge: Label = $BrassCounterPlate/CoffeeBuffBadge
 
 # Typing State
@@ -302,4 +301,3 @@ func _on_coffee_buff_ended() -> void:
 func _update_brass_plate() -> void:
 	var lang = GameManager.language
 	brass_counter_label.text = "✒️ %d %s" % [int(GameManager.points), "Tinta" if lang == "pt" else "Ink"]
-	brass_record_label.text = "🏆 %s: %d" % ["Recorde" if lang == "pt" else "Best", GameManager.highest_run_score]

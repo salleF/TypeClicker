@@ -118,38 +118,28 @@ color = Color(0.29, 0.12, 0.11, 1)
 polygon = PackedVector2Array(-230, -55, 230, -55, 230, -30, -230, -30)
 
 [node name="BrassCounterPlate" type="Polygon2D" parent="."]
+z_index = 2
 position = Vector2(0, -38)
 color = Color(0.85, 0.68, 0.35, 1)
-polygon = PackedVector2Array(-140, -14, 140, -14, 130, 14, -130, 14)
+polygon = PackedVector2Array(-95, -14, 95, -14, 85, 14, -85, 14)
 
 [node name="PlateBorder" type="Line2D" parent="BrassCounterPlate"]
-points = PackedVector2Array(-140, -14, 140, -14, 130, 14, -130, 14, -140, -14)
+points = PackedVector2Array(-95, -14, 95, -14, 85, 14, -85, 14, -95, -14)
 width = 2.0
 default_color = Color(0.45, 0.25, 0.1, 1)
 
 [node name="CounterLabel" type="Label" parent="BrassCounterPlate"]
-offset_left = -125.0
+offset_left = -90.0
 offset_top = -12.0
-offset_right = -10.0
+offset_right = 90.0
 offset_bottom = 12.0
 theme_override_colors/font_color = Color(0.25, 0.12, 0.08, 1)
 theme_override_colors/font_shadow_color = Color(0.99, 0.91, 0.84, 0.6)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 14
 text = "✒️ 0 Tinta"
-vertical_alignment = 1
-
-[node name="RecordLabel" type="Label" parent="BrassCounterPlate"]
-offset_left = 5.0
-offset_top = -12.0
-offset_right = 120.0
-offset_bottom = 12.0
-theme_override_colors/font_color = Color(0.35, 0.18, 0.12, 1)
-theme_override_colors/font_shadow_color = Color(0.99, 0.91, 0.84, 0.5)
-theme_override_font_sizes/font_size = 11
-text = "🏆 Recorde: 0"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CoffeeBuffBadge" type="Label" parent="BrassCounterPlate"]
@@ -203,9 +193,9 @@ polygon = PackedVector2Array(-4, 8, 4, 8, 2, -24, -2, -24)
 
 [node name="PromptInsertPanel" type="Panel" parent="."]
 offset_left = -200.0
-offset_top = -170.0
+offset_top = -180.0
 offset_right = 200.0
-offset_bottom = -25.0
+offset_bottom = -54.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_paper")
 
 [node name="PromptLabel" type="Label" parent="PromptInsertPanel"]
@@ -213,9 +203,9 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 12.0
-offset_top = 20.0
+offset_top = 16.0
 offset_right = -12.0
-offset_bottom = 65.0
+offset_bottom = 56.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.29, 0.12, 0.11, 1)
 theme_override_font_sizes/font_size = 13
@@ -231,9 +221,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -95.0
-offset_top = -50.0
+offset_top = -46.0
 offset_right = 95.0
-offset_bottom = -16.0
+offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 0
 focus_mode = 0
