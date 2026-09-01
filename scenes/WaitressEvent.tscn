@@ -1,0 +1,101 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/WaitressEvent.gd" id="1_waitress"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bubble"]
+bg_color = Color(0.99, 0.91, 0.84, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.65, 0.35, 0.29, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 8
+shadow_offset = Vector2(0, 3)
+
+[node name="WaitressEvent" type="Node2D"]
+script = ExtResource("1_waitress")
+
+[node name="WaitressBody" type="Node2D" parent="."]
+
+[node name="ApronBody" type="Polygon2D" parent="WaitressBody"]
+color = Color(0.65, 0.35, 0.29, 1)
+polygon = PackedVector2Array(-24, 0, 24, 0, 28, 60, -28, 60)
+
+[node name="Shirt" type="Polygon2D" parent="WaitressBody"]
+color = Color(0.99, 0.91, 0.84, 1)
+polygon = PackedVector2Array(-18, -25, 18, -25, 22, 10, -22, 10)
+
+[node name="Head" type="Polygon2D" parent="WaitressBody"]
+color = Color(0.98, 0.69, 0.58, 1)
+polygon = PackedVector2Array(-14, -50, 14, -50, 14, -25, -14, -25)
+
+[node name="Hair" type="Polygon2D" parent="WaitressBody"]
+color = Color(0.29, 0.12, 0.11, 1)
+polygon = PackedVector2Array(-18, -55, 18, -55, 18, -40, 16, -28, 12, -28, 10, -42, -10, -42, -12, -28, -16, -28, -18, -40)
+
+[node name="Eyes" type="Polygon2D" parent="WaitressBody"]
+color = Color(0.29, 0.12, 0.11, 1)
+polygon = PackedVector2Array(-8, -38, -4, -38, -4, -34, -8, -34, 4, -38, 8, -38, 8, -34, 4, -34)
+
+[node name="Smile" type="Line2D" parent="WaitressBody"]
+points = PackedVector2Array(-5, -28, 0, -26, 5, -28)
+width = 2.0
+default_color = Color(0.29, 0.12, 0.11, 1)
+
+[node name="Tray" type="Polygon2D" parent="WaitressBody"]
+color = Color(0.85, 0.68, 0.35, 1)
+polygon = PackedVector2Array(15, -10, 48, -10, 44, -5, 19, -5)
+
+[node name="CupOnTray" type="Polygon2D" parent="WaitressBody"]
+color = Color(0.99, 0.91, 0.84, 1)
+polygon = PackedVector2Array(24, -22, 38, -22, 36, -10, 26, -10)
+
+[node name="CoffeeSteam" type="CPUParticles2D" parent="WaitressBody"]
+position = Vector2(31, -24)
+amount = 4
+lifetime = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(4, 1)
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -12)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color = Color(0.99, 0.91, 0.84, 0.4)
+
+[node name="SpeechBubble" type="Button" parent="WaitressBody"]
+offset_left = 45.0
+offset_top = -95.0
+offset_right = 125.0
+offset_bottom = -45.0
+pivot_offset = Vector2(40, 25)
+theme_override_styles/normal = SubResource("StyleBoxFlat_bubble")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bubble")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bubble")
+theme_override_colors/font_color = Color(0.29, 0.12, 0.11, 1)
+theme_override_colors/font_hover_color = Color(0.74, 0.36, 0.23, 1)
+theme_override_font_sizes/font_size = 18
+text = "☕ ?"
+
+[node name="SparkleParticles" type="CPUParticles2D" parent="WaitressBody"]
+position = Vector2(30, -20)
+emitting = false
+amount = 16
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.85
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 50)
+initial_velocity_min = 45.0
+initial_velocity_max = 95.0
+scale_amount_min = 3.0
+scale_amount_max = 6.0
+color = Color(0.96, 0.62, 0.17, 1)

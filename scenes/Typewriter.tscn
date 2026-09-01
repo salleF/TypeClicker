@@ -1,0 +1,241 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/Typewriter.gd" id="1_tw"]
+[ext_resource type="Shader" path="res://shaders/parchment_paper.gdshader" id="2_paper_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_paper"]
+shader = ExtResource("2_paper_shader")
+shader_parameter/base_color = Color(0.99, 0.91, 0.84, 1)
+shader_parameter/aged_edge_color = Color(0.88, 0.76, 0.62, 1)
+shader_parameter/grain_strength = 0.05
+shader_parameter/vignette_power = 1.3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_paper"]
+bg_color = Color(0.99, 0.91, 0.84, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.65, 0.35, 0.29, 0.6)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 10
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_progress_bg"]
+bg_color = Color(0.29, 0.12, 0.11, 0.35)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_progress_fill"]
+bg_color = Color(0.74, 0.36, 0.23, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="Typewriter" type="Node2D"]
+script = ExtResource("1_tw")
+
+[node name="TypewriterShadow" type="Polygon2D" parent="."]
+color = Color(0.18, 0.08, 0.07, 0.5)
+polygon = PackedVector2Array(-290, 110, 290, 110, 320, 160, -320, 160)
+
+[node name="RollerBackdrop" type="Polygon2D" parent="."]
+color = Color(0.18, 0.08, 0.07, 1)
+polygon = PackedVector2Array(-240, -95, 240, -95, 240, -45, -240, -45)
+
+[node name="RollerKnobs" type="Polygon2D" parent="."]
+color = Color(0.65, 0.35, 0.29, 1)
+polygon = PackedVector2Array(-260, -80, -240, -90, -240, -50, -260, -60, 240, -90, 260, -80, 260, -60, 240, -50)
+
+[node name="PaperSheet" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_paper")
+position = Vector2(0, -60)
+color = Color(0.99, 0.91, 0.84, 1)
+polygon = PackedVector2Array(-200, -170, 200, -170, 200, 15, -200, 15)
+
+[node name="SheetBorder" type="Line2D" parent="PaperSheet"]
+points = PackedVector2Array(-200, -170, 200, -170, 200, 15, -200, 15, -200, -170)
+width = 2.0
+default_color = Color(0.65, 0.35, 0.29, 0.45)
+
+[node name="SheetInfoLabel" type="Label" parent="PaperSheet"]
+offset_left = -190.0
+offset_top = -165.0
+offset_right = 50.0
+offset_bottom = -142.0
+theme_override_colors/font_color = Color(0.4, 0.2, 0.15, 0.85)
+theme_override_font_sizes/font_size = 12
+text = "Folha #1 (Mult: 1.0x)"
+
+[node name="WritingTimerLabel" type="Label" parent="PaperSheet"]
+offset_left = 60.0
+offset_top = -165.0
+offset_right = 190.0
+offset_bottom = -142.0
+theme_override_colors/font_color = Color(0.29, 0.12, 0.11, 1)
+theme_override_font_sizes/font_size = 13
+text = "⏰ 10.0s"
+horizontal_alignment = 2
+
+[node name="CategoryLabel" type="Label" parent="PaperSheet"]
+offset_left = -190.0
+offset_top = -130.0
+offset_right = 190.0
+offset_bottom = -105.0
+theme_override_colors/font_color = Color(0.65, 0.35, 0.29, 1)
+theme_override_font_sizes/font_size = 13
+text = "Vocabulário Cotidiano"
+horizontal_alignment = 1
+
+[node name="CurrentWordLabel" type="RichTextLabel" parent="PaperSheet"]
+offset_left = -190.0
+offset_top = -95.0
+offset_right = 190.0
+offset_bottom = -35.0
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[center][color=#4A1E1B]palavra[/color][/center]"
+scroll_active = false
+
+[node name="ThinkingProgressBar" type="ProgressBar" parent="PaperSheet"]
+offset_left = -100.0
+offset_top = -25.0
+offset_right = 100.0
+offset_bottom = -18.0
+theme_override_styles/background = SubResource("StyleBoxFlat_progress_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_progress_fill")
+value = 100.0
+show_percentage = false
+
+[node name="RollerBody" type="Polygon2D" parent="."]
+color = Color(0.29, 0.12, 0.11, 1)
+polygon = PackedVector2Array(-230, -55, 230, -55, 230, -30, -230, -30)
+
+[node name="BrassCounterPlate" type="Polygon2D" parent="."]
+position = Vector2(0, -38)
+color = Color(0.85, 0.68, 0.35, 1)
+polygon = PackedVector2Array(-140, -14, 140, -14, 130, 14, -130, 14)
+
+[node name="PlateBorder" type="Line2D" parent="BrassCounterPlate"]
+points = PackedVector2Array(-140, -14, 140, -14, 130, 14, -130, 14, -140, -14)
+width = 2.0
+default_color = Color(0.45, 0.25, 0.1, 1)
+
+[node name="CounterLabel" type="Label" parent="BrassCounterPlate"]
+offset_left = -125.0
+offset_top = -12.0
+offset_right = -10.0
+offset_bottom = 12.0
+theme_override_colors/font_color = Color(0.25, 0.12, 0.08, 1)
+theme_override_colors/font_shadow_color = Color(0.99, 0.91, 0.84, 0.6)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 13
+text = "✒️ 0 Tinta"
+vertical_alignment = 1
+
+[node name="RecordLabel" type="Label" parent="BrassCounterPlate"]
+offset_left = 5.0
+offset_top = -12.0
+offset_right = 120.0
+offset_bottom = 12.0
+theme_override_colors/font_color = Color(0.35, 0.18, 0.12, 1)
+theme_override_colors/font_shadow_color = Color(0.99, 0.91, 0.84, 0.5)
+theme_override_font_sizes/font_size = 11
+text = "🏆 Recorde: 0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="CoffeeBuffBadge" type="Label" parent="BrassCounterPlate"]
+visible = false
+offset_left = -60.0
+offset_top = -30.0
+offset_right = 60.0
+offset_bottom = -10.0
+theme_override_colors/font_color = Color(0.98, 0.85, 0.4, 1)
+theme_override_colors/font_shadow_color = Color(0.18, 0.08, 0.07, 0.9)
+theme_override_font_sizes/font_size = 11
+text = "☕ 2x ATIVO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Chassis" type="Polygon2D" parent="."]
+color = Color(0.29, 0.12, 0.11, 1)
+polygon = PackedVector2Array(-250, -25, 250, -25, 275, 115, -275, 115)
+
+[node name="FrontPlate" type="Polygon2D" parent="."]
+color = Color(0.65, 0.35, 0.29, 1)
+polygon = PackedVector2Array(-230, -15, 230, -15, 250, 105, -250, 105)
+
+[node name="KeyboardWell" type="Polygon2D" parent="."]
+color = Color(0.18, 0.08, 0.07, 1)
+polygon = PackedVector2Array(-210, 5, 210, 5, 230, 95, -230, 95)
+
+[node name="KeyRow1" type="Line2D" parent="."]
+points = PackedVector2Array(-180, 22, 180, 22)
+width = 8.0
+default_color = Color(0.99, 0.91, 0.84, 0.9)
+
+[node name="KeyRow2" type="Line2D" parent="."]
+points = PackedVector2Array(-170, 42, 170, 42)
+width = 8.0
+default_color = Color(0.99, 0.91, 0.84, 0.9)
+
+[node name="KeyRow3" type="Line2D" parent="."]
+points = PackedVector2Array(-160, 62, 160, 62)
+width = 8.0
+default_color = Color(0.99, 0.91, 0.84, 0.9)
+
+[node name="Spacebar" type="Polygon2D" parent="."]
+color = Color(0.98, 0.69, 0.58, 1)
+polygon = PackedVector2Array(-75, 78, 75, 78, 70, 86, -70, 86)
+
+[node name="HammerStrike" type="Polygon2D" parent="."]
+visible = false
+color = Color(0.98, 0.69, 0.58, 1)
+polygon = PackedVector2Array(-4, 8, 4, 8, 2, -24, -2, -24)
+
+[node name="PromptInsertPanel" type="Panel" parent="."]
+offset_left = -200.0
+offset_top = -170.0
+offset_right = 200.0
+offset_bottom = -25.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_paper")
+
+[node name="PromptLabel" type="Label" parent="PromptInsertPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 20.0
+offset_right = -12.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.29, 0.12, 0.11, 1)
+theme_override_font_sizes/font_size = 13
+text = "Pressione ESPAÇO para Inserir Folha"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="InsertButton" type="Button" parent="PromptInsertPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -95.0
+offset_top = -50.0
+offset_right = 95.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.99, 0.91, 0.84, 1)
+theme_override_font_sizes/font_size = 13
+text = "📄 Inserir Folha (Espaço)"

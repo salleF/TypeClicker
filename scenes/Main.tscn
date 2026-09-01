@@ -1,0 +1,242 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/Main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/ShakyCamera2D.gd" id="2_cam"]
+[ext_resource type="PackedScene" path="res://scenes/Typewriter.tscn" id="3_tw"]
+[ext_resource type="PackedScene" path="res://scenes/CoffeeCup.tscn" id="4_cup"]
+[ext_resource type="PackedScene" path="res://scenes/TrashBin.tscn" id="5_bin"]
+[ext_resource type="PackedScene" path="res://scenes/WaitressEvent.tscn" id="6_waitress"]
+[ext_resource type="PackedScene" path="res://scenes/DeskBook.tscn" id="7_deskbook"]
+[ext_resource type="PackedScene" path="res://scenes/UpgradeBookModal.tscn" id="8_book_modal"]
+[ext_resource type="Shader" path="res://shaders/vignette_light.gdshader" id="9_vignette"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vignette"]
+shader = ExtResource("9_vignette")
+shader_parameter/vignette_color = Color(0.18, 0.08, 0.07, 0.45)
+shader_parameter/warm_glow_color = Color(0.98, 0.69, 0.58, 0.1)
+shader_parameter/inner_radius = 0.35
+shader_parameter/outer_radius = 1.15
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="ShakyCamera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+script = ExtResource("2_cam")
+
+[node name="BackgroundCafeInterior" type="Node2D" parent="."]
+
+[node name="CafeWall" type="Polygon2D" parent="BackgroundCafeInterior"]
+color = Color(0.29, 0.12, 0.11, 1)
+polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 380, 0, 380)
+
+[node name="WainscotingPanels" type="Polygon2D" parent="BackgroundCafeInterior"]
+color = Color(0.22, 0.09, 0.08, 1)
+polygon = PackedVector2Array(0, 180, 1280, 180, 1280, 380, 0, 380)
+
+[node name="PanelTrim" type="Line2D" parent="BackgroundCafeInterior"]
+points = PackedVector2Array(0, 180, 1280, 180)
+width = 4.0
+default_color = Color(0.74, 0.36, 0.23, 0.8)
+
+[node name="WindowLeft" type="Polygon2D" parent="BackgroundCafeInterior"]
+position = Vector2(240, 110)
+color = Color(0.98, 0.69, 0.58, 0.35)
+polygon = PackedVector2Array(-80, -90, 80, -90, 80, 70, -80, 70)
+
+[node name="WindowLeftFrame" type="Line2D" parent="BackgroundCafeInterior/WindowLeft"]
+points = PackedVector2Array(-80, -90, 80, -90, 80, 70, -80, 70, -80, -90, 0, -90, 0, 70, -80, -10, 80, -10)
+width = 3.0
+default_color = Color(0.85, 0.68, 0.35, 0.8)
+
+[node name="WindowRight" type="Polygon2D" parent="BackgroundCafeInterior"]
+position = Vector2(1040, 110)
+color = Color(0.98, 0.69, 0.58, 0.35)
+polygon = PackedVector2Array(-80, -90, 80, -90, 80, 70, -80, 70)
+
+[node name="WindowRightFrame" type="Line2D" parent="BackgroundCafeInterior/WindowRight"]
+points = PackedVector2Array(-80, -90, 80, -90, 80, 70, -80, 70, -80, -90, 0, -90, 0, 70, -80, -10, 80, -10)
+width = 3.0
+default_color = Color(0.85, 0.68, 0.35, 0.8)
+
+[node name="HangingLamp1" type="Node2D" parent="BackgroundCafeInterior"]
+position = Vector2(420, 40)
+
+[node name="Cord" type="Line2D" parent="BackgroundCafeInterior/HangingLamp1"]
+points = PackedVector2Array(0, -40, 0, 40)
+width = 2.0
+default_color = Color(0.18, 0.08, 0.07, 1)
+
+[node name="Shade" type="Polygon2D" parent="BackgroundCafeInterior/HangingLamp1"]
+position = Vector2(0, 40)
+color = Color(0.74, 0.36, 0.23, 1)
+polygon = PackedVector2Array(-18, 0, 18, 0, 24, 16, -24, 16)
+
+[node name="LightGlow" type="Polygon2D" parent="BackgroundCafeInterior/HangingLamp1"]
+position = Vector2(0, 56)
+color = Color(0.98, 0.85, 0.4, 0.12)
+polygon = PackedVector2Array(-16, 0, 16, 0, 110, 260, -110, 260)
+
+[node name="HangingLamp2" type="Node2D" parent="BackgroundCafeInterior"]
+position = Vector2(860, 40)
+
+[node name="Cord" type="Line2D" parent="BackgroundCafeInterior/HangingLamp2"]
+points = PackedVector2Array(0, -40, 0, 40)
+width = 2.0
+default_color = Color(0.18, 0.08, 0.07, 1)
+
+[node name="Shade" type="Polygon2D" parent="BackgroundCafeInterior/HangingLamp2"]
+position = Vector2(0, 40)
+color = Color(0.74, 0.36, 0.23, 1)
+polygon = PackedVector2Array(-18, 0, 18, 0, 24, 16, -24, 16)
+
+[node name="LightGlow" type="Polygon2D" parent="BackgroundCafeInterior/HangingLamp2"]
+position = Vector2(0, 56)
+color = Color(0.98, 0.85, 0.4, 0.12)
+polygon = PackedVector2Array(-16, 0, 16, 0, 110, 260, -110, 260)
+
+[node name="CafeFloor" type="Polygon2D" parent="BackgroundCafeInterior"]
+color = Color(0.20, 0.08, 0.07, 1)
+polygon = PackedVector2Array(0, 240, 1280, 240, 1280, 380, 0, 380)
+
+[node name="FloorPlankLines" type="Line2D" parent="BackgroundCafeInterior"]
+points = PackedVector2Array(0, 290, 1280, 290, 1280, 340, 0, 340)
+width = 2.0
+default_color = Color(0.15, 0.06, 0.05, 0.8)
+
+[node name="BackgroundTableLeft" type="Node2D" parent="BackgroundCafeInterior"]
+position = Vector2(380, 270)
+
+[node name="TableShadow" type="Polygon2D" parent="BackgroundCafeInterior/BackgroundTableLeft"]
+color = Color(0.15, 0.06, 0.05, 0.6)
+polygon = PackedVector2Array(-50, 45, 50, 45, 40, 55, -40, 55)
+
+[node name="PatronSilhouette1" type="Polygon2D" parent="BackgroundCafeInterior/BackgroundTableLeft"]
+color = Color(0.24, 0.1, 0.09, 0.9)
+polygon = PackedVector2Array(-48, -40, -32, -40, -30, -15, -42, 10, -55, 10)
+
+[node name="PatronSilhouette2" type="Polygon2D" parent="BackgroundCafeInterior/BackgroundTableLeft"]
+color = Color(0.24, 0.1, 0.09, 0.9)
+polygon = PackedVector2Array(32, -38, 48, -38, 52, -10, 44, 10, 30, 10)
+
+[node name="TableLeg" type="Line2D" parent="BackgroundCafeInterior/BackgroundTableLeft"]
+points = PackedVector2Array(0, 0, 0, 45)
+width = 4.0
+default_color = Color(0.18, 0.08, 0.07, 1)
+
+[node name="TableTop" type="Polygon2D" parent="BackgroundCafeInterior/BackgroundTableLeft"]
+color = Color(0.45, 0.18, 0.15, 1)
+polygon = PackedVector2Array(-45, -5, 45, -5, 40, 5, -40, 5)
+
+[node name="MiniCup" type="Polygon2D" parent="BackgroundCafeInterior/BackgroundTableLeft"]
+color = Color(0.99, 0.91, 0.84, 0.8)
+polygon = PackedVector2Array(-10, -10, -4, -10, -5, -5, -9, -5)
+
+[node name="BackgroundTableRight" type="Node2D" parent="BackgroundCafeInterior"]
+position = Vector2(900, 270)
+
+[node name="TableShadow" type="Polygon2D" parent="BackgroundCafeInterior/BackgroundTableRight"]
+color = Color(0.15, 0.06, 0.05, 0.6)
+polygon = PackedVector2Array(-50, 45, 50, 45, 40, 55, -40, 55)
+
+[node name="PatronSilhouette" type="Polygon2D" parent="BackgroundCafeInterior/BackgroundTableRight"]
+color = Color(0.24, 0.1, 0.09, 0.9)
+polygon = PackedVector2Array(-38, -42, -22, -42, -20, -15, -30, 10, -45, 10)
+
+[node name="TableLeg" type="Line2D" parent="BackgroundCafeInterior/BackgroundTableRight"]
+points = PackedVector2Array(0, 0, 0, 45)
+width = 4.0
+default_color = Color(0.18, 0.08, 0.07, 1)
+
+[node name="TableTop" type="Polygon2D" parent="BackgroundCafeInterior/BackgroundTableRight"]
+color = Color(0.45, 0.18, 0.15, 1)
+polygon = PackedVector2Array(-45, -5, 45, -5, 40, 5, -40, 5)
+
+[node name="MiniBook" type="Polygon2D" parent="BackgroundCafeInterior/BackgroundTableRight"]
+color = Color(0.74, 0.36, 0.23, 0.85)
+polygon = PackedVector2Array(6, -8, 20, -8, 18, -4, 4, -4)
+
+[node name="BarCounter" type="Polygon2D" parent="BackgroundCafeInterior"]
+color = Color(0.35, 0.14, 0.12, 1)
+polygon = PackedVector2Array(540, 220, 740, 220, 730, 290, 550, 290)
+
+[node name="BarCounterTrim" type="Line2D" parent="BackgroundCafeInterior"]
+points = PackedVector2Array(535, 220, 745, 220)
+width = 4.0
+default_color = Color(0.85, 0.68, 0.35, 0.9)
+
+[node name="ForegroundDesk" type="Node2D" parent="."]
+
+[node name="DeskSurface" type="Polygon2D" parent="ForegroundDesk"]
+color = Color(0.24, 0.1, 0.09, 1)
+polygon = PackedVector2Array(0, 360, 1280, 360, 1280, 720, 0, 720)
+
+[node name="DeskEdgeLight" type="Line2D" parent="ForegroundDesk"]
+points = PackedVector2Array(0, 360, 1280, 360)
+width = 4.0
+default_color = Color(0.74, 0.36, 0.23, 0.9)
+
+[node name="WoodGrain1" type="Line2D" parent="ForegroundDesk"]
+points = PackedVector2Array(0, 480, 1280, 480)
+width = 2.0
+default_color = Color(0.18, 0.08, 0.07, 0.6)
+
+[node name="WoodGrain2" type="Line2D" parent="ForegroundDesk"]
+points = PackedVector2Array(0, 600, 1280, 600)
+width = 2.0
+default_color = Color(0.18, 0.08, 0.07, 0.6)
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="WaitressEvent" parent="Environment" instance=ExtResource("6_waitress")]
+position = Vector2(640, 200)
+
+[node name="TrashBin" parent="Environment" instance=ExtResource("5_bin")]
+position = Vector2(180, 550)
+
+[node name="Typewriter" parent="Environment" instance=ExtResource("3_tw")]
+position = Vector2(640, 500)
+trash_bin_path = NodePath("../TrashBin")
+
+[node name="CoffeeCup" parent="Environment" instance=ExtResource("4_cup")]
+position = Vector2(1040, 460)
+
+[node name="DeskBook" parent="Environment" instance=ExtResource("7_deskbook")]
+position = Vector2(1060, 595)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="AmbientVignette" type="ColorRect" parent="UI"]
+material = SubResource("ShaderMaterial_vignette")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DeskOverlay" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LangButton" type="Button" parent="UI/DeskOverlay"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -46.0
+offset_right = 145.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.99, 0.91, 0.84, 0.9)
+theme_override_font_sizes/font_size = 11
+text = "🇧🇷 Idioma: PT"
+
+[node name="UpgradeBookModal" parent="UI" instance=ExtResource("8_book_modal")]
+visible = false

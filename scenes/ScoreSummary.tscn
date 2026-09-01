@@ -1,0 +1,174 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ScoreSummary.gd" id="1_score"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+bg_color = Color(0.99, 0.91, 0.84, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.65, 0.35, 0.29, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 16
+shadow_offset = Vector2(0, 6)
+
+[node name="ScoreSummary" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(640, 360)
+script = ExtResource("1_score")
+
+[node name="Card" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -160.0
+offset_right = 220.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="TitleLabel" type="Label" parent="Card"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 16.0
+offset_bottom = 44.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.29, 0.12, 0.11, 1)
+theme_override_font_sizes/font_size = 18
+text = "Folha Descartada!"
+horizontal_alignment = 1
+
+[node name="ReasonLabel" type="Label" parent="Card"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 46.0
+offset_bottom = 70.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.65, 0.35, 0.29, 1)
+theme_override_font_sizes/font_size = 12
+text = "🗑️ Letra errada"
+horizontal_alignment = 1
+
+[node name="StatsGrid" type="GridContainer" parent="Card"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -75.0
+offset_right = 180.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 12
+columns = 2
+
+[node name="PointsBox" type="VBoxContainer" parent="Card/StatsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Card/StatsGrid/PointsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.2, 0.15, 0.8)
+theme_override_font_sizes/font_size = 11
+text = "Pontos de Tinta:"
+
+[node name="ValueLabel" type="Label" parent="Card/StatsGrid/PointsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.29, 0.12, 0.11, 1)
+theme_override_font_sizes/font_size = 20
+text = "+0"
+
+[node name="CultureBox" type="VBoxContainer" parent="Card/StatsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Card/StatsGrid/CultureBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.2, 0.15, 0.8)
+theme_override_font_sizes/font_size = 11
+text = "Pontos de Cultura:"
+
+[node name="ValueLabel" type="Label" parent="Card/StatsGrid/CultureBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.74, 0.36, 0.23, 1)
+theme_override_font_sizes/font_size = 20
+text = "+0"
+
+[node name="WordsBox" type="VBoxContainer" parent="Card/StatsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Card/StatsGrid/WordsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.2, 0.15, 0.8)
+theme_override_font_sizes/font_size = 11
+text = "Palavras Concluídas:"
+
+[node name="ValueLabel" type="Label" parent="Card/StatsGrid/WordsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.29, 0.12, 0.11, 1)
+theme_override_font_sizes/font_size = 16
+text = "0"
+
+[node name="SheetsBox" type="VBoxContainer" parent="Card/StatsGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Card/StatsGrid/SheetsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.2, 0.15, 0.8)
+theme_override_font_sizes/font_size = 11
+text = "Folhas Fechadas:"
+
+[node name="ValueLabel" type="Label" parent="Card/StatsGrid/SheetsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.29, 0.12, 0.11, 1)
+theme_override_font_sizes/font_size = 16
+text = "0"
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="Card"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -55.0
+offset_right = -20.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 12
+
+[node name="PlayAgainButton" type="Button" parent="Card/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "📄 Nova Folha (Espaço)"
+
+[node name="OpenBookButton" type="Button" parent="Card/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "📖 Livro Upgrades (L)"

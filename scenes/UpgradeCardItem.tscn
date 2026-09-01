@@ -1,0 +1,121 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/UpgradeCardItem.gd" id="1_card"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_panel"]
+bg_color = Color(0.99, 0.91, 0.84, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.65, 0.35, 0.29, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 12
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buy_btn"]
+bg_color = Color(0.65, 0.35, 0.29, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.98, 0.69, 0.58, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="UpgradeCardItem" type="PanelContainer"]
+custom_minimum_size = Vector2(250, 370)
+pivot_offset = Vector2(125, 185)
+theme_override_styles/panel = SubResource("StyleBoxFlat_card_panel")
+script = ExtResource("1_card")
+
+[node name="CardVBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CoverContainer" type="Control" parent="CardVBox"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="BookCover" type="ColorRect" parent="CardVBox/CoverContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -50.0
+offset_right = 70.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.45, 0.18, 0.15, 1)
+
+[node name="CoverGoldBorder" type="Line2D" parent="CardVBox/CoverContainer/BookCover"]
+points = PackedVector2Array(6, 6, 134, 6, 134, 94, 6, 94, 6, 6)
+width = 2.0
+default_color = Color(0.96, 0.75, 0.4, 0.9)
+
+[node name="SymbolLabel" type="Label" parent="CardVBox/CoverContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -25.0
+offset_right = 30.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "🍃"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CardVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.29, 0.12, 0.11, 1)
+theme_override_font_sizes/font_size = 15
+text = "Poesias ao Vento"
+horizontal_alignment = 1
+
+[node name="CategoryBadge" type="Label" parent="CardVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.74, 0.36, 0.23, 1)
+theme_override_font_sizes/font_size = 11
+text = "[ Acervo Poético ]"
+horizontal_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="CardVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.3, 0.25, 0.9)
+theme_override_font_sizes/font_size = 11
+text = "Nível 0 / 1"
+horizontal_alignment = 1
+
+[node name="DescLabel" type="Label" parent="CardVBox"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.35, 0.18, 0.15, 1)
+theme_override_font_sizes/font_size = 11
+text = "Adiciona palavras líricas e românticas com grande bônus de tinta."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BuyButton" type="Button" parent="CardVBox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_buy_btn")
+theme_override_colors/font_color = Color(0.99, 0.91, 0.84, 1)
+theme_override_font_sizes/font_size = 12
+text = "Adquirir: ✒️ 120"

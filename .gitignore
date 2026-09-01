@@ -1,0 +1,8 @@
+# Godot 4 .gitignore
+.godot/
+*.translation
+*.tmp
+*.log
+audio_debug.log
+test_screenshots/
+*.import.tmp

@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/DeskBook.gd" id="1_book"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(120, 85)
+
+[node name="DeskBook" type="Node2D"]
+script = ExtResource("1_book")
+
+[node name="GlowEffect" type="ColorRect" parent="."]
+offset_left = -70.0
+offset_top = -50.0
+offset_right = 70.0
+offset_bottom = 50.0
+color = Color(0.96, 0.62, 0.17, 0.45)
+
+[node name="BookShadow" type="Polygon2D" parent="."]
+color = Color(0.18, 0.08, 0.07, 0.55)
+polygon = PackedVector2Array(-60, 32, 60, 32, 54, 46, -54, 46)
+
+[node name="BookPages" type="Polygon2D" parent="."]
+color = Color(0.99, 0.91, 0.84, 1)
+polygon = PackedVector2Array(-56, -28, 56, -28, 58, 28, -54, 28)
+
+[node name="BookCover" type="Polygon2D" parent="."]
+color = Color(0.45, 0.18, 0.15, 1)
+polygon = PackedVector2Array(-60, -32, 55, -32, 58, 30, -58, 30)
+
+[node name="GoldCorner1" type="Polygon2D" parent="."]
+color = Color(0.85, 0.68, 0.35, 1)
+polygon = PackedVector2Array(-60, -32, -45, -32, -60, -17)
+
+[node name="GoldCorner2" type="Polygon2D" parent="."]
+color = Color(0.85, 0.68, 0.35, 1)
+polygon = PackedVector2Array(55, -32, 40, -32, 57, -15)
+
+[node name="GoldBorders" type="Line2D" parent="."]
+points = PackedVector2Array(-54, -28, 49, -28, 52, 26, -52, 26, -54, -28)
+width = 2.0
+default_color = Color(0.96, 0.75, 0.4, 0.85)
+
+[node name="RibbonBookmark" type="Polygon2D" parent="."]
+color = Color(0.74, 0.36, 0.23, 1)
+polygon = PackedVector2Array(10, 28, 22, 28, 20, 46, 16, 41, 12, 46)
+
+[node name="CoverEmboss" type="Polygon2D" parent="."]
+color = Color(0.96, 0.75, 0.4, 0.9)
+polygon = PackedVector2Array(-5, -14, 5, -14, 14, -5, 14, 5, 5, 14, -5, 14, -14, 5, -14, -5)
+
+[node name="BookmarkTag" type="Label" parent="."]
+offset_left = -65.0
+offset_top = -60.0
+offset_right = 65.0
+offset_bottom = -36.0
+theme_override_colors/font_color = Color(0.99, 0.91, 0.84, 1)
+theme_override_colors/font_shadow_color = Color(0.18, 0.08, 0.07, 0.9)
+theme_override_font_sizes/font_size = 12
+text = "📖 Upgrades (L)"
+horizontal_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_1")

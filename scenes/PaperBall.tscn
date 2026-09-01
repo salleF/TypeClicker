@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/PaperBall.gd" id="1_ball"]
+
+[node name="PaperBall" type="Node2D"]
+script = ExtResource("1_ball")
+
+[node name="BallShadow" type="Polygon2D" parent="."]
+color = Color(0.18, 0.08, 0.07, 0.3)
+polygon = PackedVector2Array(-18, 14, 0, 20, 18, 14, 0, 8)
+
+[node name="BallShape" type="Polygon2D" parent="."]
+color = Color(0.99, 0.91, 0.84, 1)
+polygon = PackedVector2Array(-14, -8, -6, -16, 8, -14, 16, -4, 14, 10, 4, 16, -10, 14, -16, 2)
+
+[node name="CreaseLines" type="Line2D" parent="."]
+points = PackedVector2Array(-10, -6, 2, -2, -4, 8, 10, 4, 6, -10)
+width = 2.0
+default_color = Color(0.65, 0.35, 0.29, 0.8)

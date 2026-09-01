@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="28" fill="#4A1E1B"/>
+  <rect x="16" y="16" width="96" height="96" rx="20" fill="#BC5D3B" stroke="#FDE8D7" stroke-width="4"/>
+  <!-- Paper -->
+  <rect x="36" y="24" width="56" height="40" rx="4" fill="#FDE8D7"/>
+  <line x1="44" y1="36" x2="84" y2="36" stroke="#4A1E1B" stroke-width="3" stroke-linecap="round"/>
+  <line x1="44" y1="46" x2="72" y2="46" stroke="#A7584A" stroke-width="3" stroke-linecap="round"/>
+  <!-- Typewriter Body -->
+  <rect x="28" y="60" width="72" height="44" rx="8" fill="#4A1E1B" stroke="#FBB095" stroke-width="2"/>
+  <!-- Keys -->
+  <circle cx="42" cy="74" r="4" fill="#FDE8D7"/>
+  <circle cx="56" cy="74" r="4" fill="#FDE8D7"/>
+  <circle cx="70" cy="74" r="4" fill="#FDE8D7"/>
+  <circle cx="84" cy="74" r="4" fill="#FDE8D7"/>
+  <circle cx="48" cy="86" r="4" fill="#FDE8D7"/>
+  <circle cx="64" cy="86" r="4" fill="#FBB095"/>
+  <circle cx="80" cy="86" r="4" fill="#FDE8D7"/>
+  <!-- Spacebar -->
+  <rect x="44" y="96" width="40" height="4" rx="2" fill="#FDE8D7"/>
+</svg>

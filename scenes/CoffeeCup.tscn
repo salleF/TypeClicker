@@ -1,0 +1,90 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/CoffeeCup.gd" id="1_cup"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 48.0
+
+[sub_resource type="Curve" id="Curve_steam"]
+_data = [Vector2(0, 0.4), 0.0, 1.2, 0, 0, Vector2(0.6, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.5, 0.0, 0, 0]
+point_count = 3
+
+[node name="CoffeeCup" type="Node2D"]
+script = ExtResource("1_cup")
+
+[node name="GlowEffect" type="ColorRect" parent="."]
+visible = false
+offset_left = -65.0
+offset_top = -65.0
+offset_right = 65.0
+offset_bottom = 65.0
+color = Color(0.96, 0.62, 0.17, 0.35)
+
+[node name="Saucer" type="Polygon2D" parent="."]
+color = Color(0.99, 0.91, 0.84, 1)
+polygon = PackedVector2Array(-52, 18, -38, 26, 38, 26, 52, 18, 40, 12, -40, 12)
+
+[node name="SaucerGoldBorder" type="Line2D" parent="."]
+points = PackedVector2Array(-52, 18, -38, 26, 38, 26, 52, 18)
+width = 2.0
+default_color = Color(0.85, 0.68, 0.35, 1)
+
+[node name="CupBody" type="Polygon2D" parent="."]
+color = Color(0.65, 0.35, 0.29, 1)
+polygon = PackedVector2Array(-36, -22, -30, 16, 30, 16, 36, -22)
+
+[node name="CupRim" type="Polygon2D" parent="."]
+color = Color(0.99, 0.91, 0.84, 1)
+polygon = PackedVector2Array(-38, -25, -35, -20, 35, -20, 38, -25, 30, -30, -30, -30)
+
+[node name="Liquid" type="Polygon2D" parent="."]
+color = Color(0.29, 0.12, 0.11, 1)
+polygon = PackedVector2Array(-32, -22, 32, -22, 28, -18, -28, -18)
+
+[node name="LatteHeart" type="Polygon2D" parent="."]
+color = Color(0.98, 0.85, 0.68, 0.9)
+polygon = PackedVector2Array(0, -18, -6, -22, 0, -21, 6, -22)
+
+[node name="Handle" type="Line2D" parent="."]
+points = PackedVector2Array(34, -16, 50, -12, 48, 8, 28, 10)
+width = 6.0
+default_color = Color(0.65, 0.35, 0.29, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="SteamParticles" type="CPUParticles2D" parent="."]
+position = Vector2(0, -30)
+amount = 12
+lifetime = 1.6
+emission_shape = 3
+emission_rect_extents = Vector2(18, 2)
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, -18)
+initial_velocity_min = 25.0
+initial_velocity_max = 42.0
+scale_amount_min = 3.0
+scale_amount_max = 7.0
+scale_amount_curve = SubResource("Curve_steam")
+color = Color(0.99, 0.91, 0.84, 0.45)
+
+[node name="BuffLabel" type="Label" parent="."]
+visible = false
+offset_left = -55.0
+offset_top = -75.0
+offset_right = 55.0
+offset_bottom = -35.0
+theme_override_colors/font_color = Color(0.98, 0.85, 0.4, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_font_sizes/font_size = 13
+text = "2x COFFEE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_1")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
