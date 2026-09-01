@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_main"]
 [ext_resource type="Script" path="res://scripts/ShakyCamera2D.gd" id="2_cam"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://scenes/DeskBook.tscn" id="7_deskbook"]
 [ext_resource type="PackedScene" path="res://scenes/UpgradeBookModal.tscn" id="8_book_modal"]
 [ext_resource type="Shader" path="res://shaders/vignette_light.gdshader" id="9_vignette"]
+[ext_resource type="PackedScene" path="res://scenes/PauseModal.tscn" id="10_pause"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vignette"]
 shader = ExtResource("9_vignette")
@@ -239,4 +240,7 @@ theme_override_font_sizes/font_size = 11
 text = "🇧🇷 Idioma: PT"
 
 [node name="UpgradeBookModal" parent="UI" instance=ExtResource("8_book_modal")]
+visible = false
+
+[node name="PauseModal" parent="UI" instance=ExtResource("10_pause")]
 visible = false

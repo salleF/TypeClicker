@@ -55,29 +55,11 @@ func play_sound(stream: AudioStream, volume_db: float = 0.0, pitch_scale: float 
 	elif stream is AudioStreamWAV:
 		(stream as AudioStreamWAV).loop_mode = AudioStreamWAV.LOOP_DISABLED
 
-	var stream_name = stream.resource_path.get_file() if stream.resource_path != "" else "procedural_chime"
-	var stack = get_stack()
-	var caller_info = ""
-	if stack.size() > 1:
-		var caller = stack[1]
-		caller_info = "%s:%d in %s()" % [caller.get("source", "").get_file(), caller.get("line", 0), caller.get("function", "")]
-
-	var log_msg = "[SoundManager] 🔊 TOCANDO SFX: '%s' | Origem: %s" % [stream_name, caller_info]
-	print(log_msg)
-	_append_log(log_msg)
-
 	var player = _get_available_player()
 	player.stream = stream
 	player.volume_db = volume_db + linear_to_db(GameManager.sfx_volume)
 	player.pitch_scale = pitch_scale
 	player.play()
-
-func _append_log(msg: String) -> void:
-	var f = FileAccess.open("res://audio_debug.log", FileAccess.READ_WRITE if FileAccess.file_exists("res://audio_debug.log") else FileAccess.WRITE)
-	if f:
-		f.seek_end()
-		f.store_line("[%s] %s" % [Time.get_time_string_from_system(), msg])
-		f.close()
 
 # --- Game Audio Triggers ---
 

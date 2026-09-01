@@ -434,7 +434,27 @@ func buy_upgrade(key: String) -> bool:
 	save_game()
 	return true
 
-# --- Save / Load ---
+# --- Save / Load & Reset ---
+func reset_progress() -> void:
+	points = 0.0
+	career_words_typed = 0
+	career_sheets_completed = 0
+	career_crumpled_papers = 0
+	highest_run_score = 0
+	is_run_active = false
+	sheets_completed_in_run = 0
+	current_sheet_words_typed = 0
+	current_sheet_score = 0
+	is_coffee_active = false
+	coffee_time_remaining = 0.0
+
+	for id in upgrades:
+		upgrades[id]["level"] = 0
+
+	roll_draft_upgrades()
+	save_game()
+	points_updated.emit(points)
+
 func save_game() -> void:
 	var save_dict = {
 		"points": points,

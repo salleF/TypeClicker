@@ -9,6 +9,7 @@ extends Node2D
 @onready var trash_bin: Node2D = $Environment/TrashBin
 @onready var waitress: Node2D = $Environment/WaitressEvent
 @onready var upgrade_book_modal: Control = $UI/UpgradeBookModal
+@onready var pause_modal: Control = $UI/PauseModal
 @onready var lang_button: Button = $UI/DeskOverlay/LangButton
 
 func _ready() -> void:
@@ -29,16 +30,31 @@ func _ready() -> void:
 	lang_button.pressed.connect(_on_toggle_language_pressed)
 	upgrade_book_modal.closed.connect(_on_book_closed)
 
+	# Connect Pause Modal
+	pause_modal.progress_reset.connect(_on_progress_reset)
+
 	_update_language_ui()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_L and not upgrade_book_modal.visible:
+		if event.keycode == KEY_ESCAPE:
+			if upgrade_book_modal.visible:
+				upgrade_book_modal.close_book()
+				get_viewport().set_input_as_handled()
+			elif pause_modal.visible:
+				pause_modal.resume_game()
+				get_viewport().set_input_as_handled()
+			else:
+				pause_modal.open_pause()
+				get_viewport().set_input_as_handled()
+		elif event.keycode == KEY_L and not upgrade_book_modal.visible and not pause_modal.visible:
 			_on_open_book_pressed()
 			get_viewport().set_input_as_handled()
-		elif event.keycode == KEY_ESCAPE and upgrade_book_modal.visible:
-			upgrade_book_modal.close_book()
-			get_viewport().set_input_as_handled()
+
+func _on_progress_reset() -> void:
+	typewriter._set_idle_state()
+	desk_book.set_highlight(true)
+	_update_language_ui()
 
 func _on_points_updated(_pts: float) -> void:
 	pass
