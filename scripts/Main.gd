@@ -27,6 +27,7 @@ func _ready() -> void:
 
 	# Connect Desk Book & Language
 	desk_book.book_clicked.connect(_on_open_book_pressed)
+	lang_button.focus_mode = Control.FOCUS_NONE
 	lang_button.pressed.connect(_on_toggle_language_pressed)
 	upgrade_book_modal.closed.connect(_on_book_closed)
 
@@ -95,6 +96,7 @@ func _on_book_closed() -> void:
 	pass
 
 func _on_toggle_language_pressed() -> void:
+	lang_button.release_focus()
 	GameManager.language = "en" if GameManager.language == "pt" else "pt"
 	GameManager.save_game()
 	_update_language_ui()

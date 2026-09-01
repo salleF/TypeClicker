@@ -46,6 +46,7 @@ func _ready() -> void:
 	if not trash_bin_path.is_empty():
 		trash_bin_node = get_node_or_null(trash_bin_path)
 
+	prompt_button.focus_mode = Control.FOCUS_NONE
 	prompt_button.pressed.connect(insert_new_sheet)
 	GameManager.points_updated.connect(_on_points_updated)
 	GameManager.coffee_buff_started.connect(_on_coffee_buff_started)
