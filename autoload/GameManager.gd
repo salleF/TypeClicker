@@ -39,13 +39,22 @@ var language: String = "pt"
 var sfx_volume: float = 0.8
 var sound_enabled: bool = true
 
-# Upgrades Core State (All using Ink Points)
+# Upgrades Core State (All using Ink Points - 1 Word = 1 Ink Drop Base Economy)
 var upgrades = {
+	"long_word_bonus": {
+		"level": 0,
+		"max_level": 1,
+		"base_cost": 20,
+		"cost_scale": 1.0,
+		"currency": "points",
+		"base_val": 1.0,
+		"val_per_lvl": 1.0 # Gives 2x points for 7+ letter words
+	},
 	"thinking_time": {
 		"level": 0,
 		"max_level": 8,
-		"base_cost": 35,
-		"cost_scale": 1.6,
+		"base_cost": 6,
+		"cost_scale": 1.45,
 		"currency": "points",
 		"base_val": 0.5,
 		"val_per_lvl": 0.15
@@ -53,8 +62,8 @@ var upgrades = {
 	"writing_time_base": {
 		"level": 0,
 		"max_level": 8,
-		"base_cost": 50,
-		"cost_scale": 1.6,
+		"base_cost": 8,
+		"cost_scale": 1.45,
 		"currency": "points",
 		"base_val": 10.0,
 		"val_per_lvl": 2.0
@@ -62,35 +71,35 @@ var upgrades = {
 	"writing_time_per_word": {
 		"level": 0,
 		"max_level": 8,
-		"base_cost": 75,
-		"cost_scale": 1.65,
+		"base_cost": 12,
+		"cost_scale": 1.5,
 		"currency": "points",
 		"base_val": 0.0,
 		"val_per_lvl": 0.35
 	},
 	"letter_score_multiplier": {
 		"level": 0,
-		"max_level": 10,
-		"base_cost": 60,
-		"cost_scale": 1.7,
+		"max_level": 5,
+		"base_cost": 15,
+		"cost_scale": 1.55,
 		"currency": "points",
 		"base_val": 1.0,
-		"val_per_lvl": 0.35
+		"val_per_lvl": 0.25
 	},
 	"sheet_multiplier_bonus": {
 		"level": 0,
 		"max_level": 8,
-		"base_cost": 120,
-		"cost_scale": 1.85,
+		"base_cost": 20,
+		"cost_scale": 1.6,
 		"currency": "points",
 		"base_val": 1.0,
-		"val_per_lvl": 0.30
+		"val_per_lvl": 0.25
 	},
 	"special_sheet_chance": {
 		"level": 0,
 		"max_level": 5,
-		"base_cost": 200,
-		"cost_scale": 2.0,
+		"base_cost": 30,
+		"cost_scale": 1.7,
 		"currency": "points",
 		"base_val": 0.0,
 		"val_per_lvl": 0.06
@@ -98,8 +107,8 @@ var upgrades = {
 	"waitress_frequency": {
 		"level": 0,
 		"max_level": 6,
-		"base_cost": 150,
-		"cost_scale": 1.8,
+		"base_cost": 18,
+		"cost_scale": 1.5,
 		"currency": "points",
 		"base_val": 1.0,
 		"val_per_lvl": 0.35
@@ -107,21 +116,29 @@ var upgrades = {
 	"coffee_power": {
 		"level": 0,
 		"max_level": 6,
-		"base_cost": 220,
-		"cost_scale": 1.85,
+		"base_cost": 25,
+		"cost_scale": 1.6,
 		"currency": "points",
 		"base_val": 2.0,
 		"val_per_lvl": 0.5
 	},
-	"lexicon_literature": { "level": 0, "max_level": 1, "base_cost": 90, "cost_scale": 1.0, "currency": "points", "category_key": "literature" },
-	"lexicon_engineering": { "level": 0, "max_level": 1, "base_cost": 180, "cost_scale": 1.0, "currency": "points", "category_key": "engineering" },
-	"lexicon_poetry": { "level": 0, "max_level": 1, "base_cost": 280, "cost_scale": 1.0, "currency": "points", "category_key": "poetry" },
-	"lexicon_gastronomy": { "level": 0, "max_level": 1, "base_cost": 380, "cost_scale": 1.0, "currency": "points", "category_key": "gastronomy" },
-	"lexicon_philosophy": { "level": 0, "max_level": 1, "base_cost": 500, "cost_scale": 1.0, "currency": "points", "category_key": "philosophy" }
+	"lexicon_literature": { "level": 0, "max_level": 1, "base_cost": 12, "cost_scale": 1.0, "currency": "points", "category_key": "literature" },
+	"lexicon_engineering": { "level": 0, "max_level": 1, "base_cost": 20, "cost_scale": 1.0, "currency": "points", "category_key": "engineering" },
+	"lexicon_poetry": { "level": 0, "max_level": 1, "base_cost": 28, "cost_scale": 1.0, "currency": "points", "category_key": "poetry" },
+	"lexicon_gastronomy": { "level": 0, "max_level": 1, "base_cost": 38, "cost_scale": 1.0, "currency": "points", "category_key": "gastronomy" },
+	"lexicon_philosophy": { "level": 0, "max_level": 1, "base_cost": 50, "cost_scale": 1.0, "currency": "points", "category_key": "philosophy" }
 }
 
 # Roguelite Tomes Catalog
 var book_cards_catalog = [
+	{
+		"upgrade_key": "long_word_bonus",
+		"title": {"pt": "Verborragia Erudita", "en": "Grandiloquence"},
+		"category": {"pt": "Erudição Rara", "en": "Rare Erudition"},
+		"description": {"pt": "Palavras com 7 ou mais letras concedem o DOBRO de tinta (2x).", "en": "Words with 7 or more letters grant DOUBLE ink (2x)."},
+		"cover_color": Color(0.85, 0.45, 0.15, 1),
+		"symbol": "💎"
+	},
 	{
 		"upgrade_key": "lexicon_poetry",
 		"title": {"pt": "Poesias ao Vento", "en": "Poems in the Wind"},
@@ -190,7 +207,7 @@ var book_cards_catalog = [
 		"upgrade_key": "letter_score_multiplier",
 		"title": {"pt": "Tinta de Lótus Negra", "en": "Black Lotus Ink"},
 		"category": {"pt": "Caligrafia", "en": "Calligraphy"},
-		"description": {"pt": "Multiplica a pontuação ganha por letra e palavras longas (+35%).", "en": "Multiplies points gained per character and long words (+35%)."},
+		"description": {"pt": "Multiplica o rendimento de tinta de todas as palavras (+25%).", "en": "Multiplies ink yield of all words (+25%)."},
 		"cover_color": Color(0.25, 0.20, 0.28, 1),
 		"symbol": "✒️"
 	},
@@ -263,7 +280,7 @@ func roll_draft_upgrades() -> Array:
 	return current_draft_cards
 
 func reroll_draft_with_cost() -> bool:
-	var reroll_cost = 10
+	var reroll_cost = 2
 	if points < reroll_cost:
 		return false
 	points -= reroll_cost
@@ -273,6 +290,11 @@ func reroll_draft_with_cost() -> bool:
 	return true
 
 # --- Upgrades Calculations ---
+func get_long_word_multiplier(word_length: int) -> float:
+	if word_length >= 7 and upgrades["long_word_bonus"]["level"] > 0:
+		return 2.0
+	return 1.0
+
 func get_thinking_time_limit() -> float:
 	var up = upgrades["thinking_time"]
 	return up["base_val"] + (up["level"] * up["val_per_lvl"])
@@ -337,13 +359,15 @@ func start_new_sheet() -> void:
 	sheet_started.emit(sheets_completed_in_run + 1, is_special_sheet, special_sheet_type)
 
 func record_word_completed(word_data: Dictionary) -> int:
-	var base = word_data.get("base_points", 10)
+	var base = word_data.get("base_points", 1)
+	var word_len = word_data.get("length", 4)
 
+	var long_word_mult = get_long_word_multiplier(word_len)
 	var letter_mult = get_letter_multiplier()
 	var coffee_mult = get_coffee_multiplier()
 	var sheet_mult = get_sheet_multiplier()
 
-	var word_score = int(base * letter_mult * coffee_mult * sheet_mult)
+	var word_score = max(1, int(round(base * long_word_mult * letter_mult * coffee_mult * sheet_mult)))
 
 	current_sheet_score += word_score
 	current_sheet_words_typed += 1

@@ -49,7 +49,7 @@ func _on_reroll_pressed() -> void:
 func _update_header() -> void:
 	var lang = GameManager.language
 	points_label.text = "✒️ %d %s Disponíveis" % [int(GameManager.points), "Gotas de Tinta" if lang == "pt" else "Ink Drops"]
-	reroll_button.text = "🎲 Re-rolar Tomos (R) - 10 ✒️" if lang == "pt" else "🎲 Re-roll Tomes (R) - 10 ✒️"
+	reroll_button.text = "🎲 Re-rolar Tomos (R) - 2 ✒️" if lang == "pt" else "🎲 Re-roll Tomes (R) - 2 ✒️"
 	close_button.text = "Voltar à Máquina (ESC)" if lang == "pt" else "Back to Typewriter (ESC)"
 
 func _populate_cards() -> void:

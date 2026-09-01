@@ -161,15 +161,23 @@ func get_paced_word(word_index_on_sheet: int, unlocked_categories: Array, langua
 	var text: String = matching_words[randi() % matching_words.size()]
 	var info = category_info.get(target_category, category_info["basic"])
 
-	var length_bonus = max(1, text.length() * 4)
-	var cat_bonus = info["bonus_points"] * (2 if is_climax else 1)
-	var base_pts = (length_bonus + cat_bonus + (25 if is_climax else 0)) * info["culture_multiplier"]
+	# Base ink drop calculation: 1 base per word + small cultural prestige bonus for unlocked rich lexicons
+	var cat_bonus = 0
+	if target_category in ["literature", "engineering"]:
+		cat_bonus = 1
+	elif target_category in ["poetry", "gastronomy"]:
+		cat_bonus = 1
+	elif target_category == "philosophy":
+		cat_bonus = 2
+
+	if is_climax:
+		cat_bonus += 1
 
 	return {
 		"text": text.to_lower(),
 		"category": target_category,
-		"category_name": info["name"][language] + (" [CLÍMAX 2x]" if (is_climax and language == "pt") else (" [CLIMAX 2x]" if is_climax else "")),
-		"base_points": base_pts,
+		"category_name": info["name"][language] + (" [CLÍMAX]" if (is_climax and language == "pt") else (" [CLIMAX]" if is_climax else "")),
+		"base_points": 1 + cat_bonus,
 		"length": text.length(),
 		"is_climax": is_climax
 	}
