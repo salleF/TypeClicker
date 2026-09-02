@@ -200,33 +200,18 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_paper")
 
 [node name="PromptLabel" type="Label" parent="PromptInsertPanel"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = 12.0
-offset_top = 16.0
-offset_right = -12.0
-offset_bottom = 56.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = -16.0
+offset_bottom = -10.0
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0.29, 0.12, 0.11, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 15
 text = "Pressione ESPAÇO para Inserir Folha"
 horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 2
-
-[node name="InsertButton" type="Button" parent="PromptInsertPanel"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -95.0
-offset_top = -46.0
-offset_right = 95.0
-offset_bottom = -14.0
-grow_horizontal = 2
-grow_vertical = 0
-focus_mode = 0
-theme_override_colors/font_color = Color(0.99, 0.91, 0.84, 1)
-theme_override_font_sizes/font_size = 13
-text = "📄 Inserir Folha (Espaço)"

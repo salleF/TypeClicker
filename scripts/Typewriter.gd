@@ -21,7 +21,6 @@ var trash_bin_node: Node2D = null
 @onready var writing_timer_label: Label = $PaperSheet/WritingTimerLabel
 @onready var prompt_panel: Panel = $PromptInsertPanel
 @onready var prompt_label: Label = $PromptInsertPanel/PromptLabel
-@onready var prompt_button: Button = $PromptInsertPanel/InsertButton
 @onready var hammer_strike: Polygon2D = $HammerStrike
 
 # Diegetic Brass Odometer Plate
@@ -45,14 +44,17 @@ func _ready() -> void:
 	if not trash_bin_path.is_empty():
 		trash_bin_node = get_node_or_null(trash_bin_path)
 
-	prompt_button.focus_mode = Control.FOCUS_NONE
-	prompt_button.pressed.connect(insert_new_sheet)
+	prompt_panel.gui_input.connect(_on_prompt_panel_gui_input)
 	GameManager.points_updated.connect(_on_points_updated)
 	GameManager.coffee_buff_started.connect(_on_coffee_buff_started)
 	GameManager.coffee_buff_ended.connect(_on_coffee_buff_ended)
 
 	_update_brass_plate()
 	_set_idle_state()
+
+func _on_prompt_panel_gui_input(event: InputEvent) -> void:
+	if not is_active and event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		insert_new_sheet()
 
 func _process(delta: float) -> void:
 	if is_active:
@@ -228,7 +230,6 @@ func _set_idle_state() -> void:
 	prompt_panel.visible = true
 	paper_node.visible = false
 	prompt_label.text = "Pressione ESPAÇO para Inserir Folha" if GameManager.language == "pt" else "Press SPACE to Insert Sheet"
-	prompt_button.text = "📄 Inserir Folha (Espaço)" if GameManager.language == "pt" else "📄 Insert Sheet (Space)"
 	_update_brass_plate()
 
 func _update_sheet_header() -> void:
