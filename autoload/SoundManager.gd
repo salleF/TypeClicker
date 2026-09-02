@@ -7,19 +7,15 @@ var max_sfx_players: int = 16
 
 # Loaded Audio Assets
 var sfx_key_1: AudioStream = preload("res://assets/sound/Keyboard Typing 1.mp3")
-var sfx_key_2: AudioStream = preload("res://assets/sound/Keyboard Typing 2.mp3")
 var sfx_erro: AudioStream = preload("res://assets/sound/Erro.mp3")
 var sfx_lever: AudioStream = preload("res://assets/sound/Lever.mp3")
 var sfx_bell: AudioStream = preload("res://assets/sound/Bell.mp3")
 var sfx_next_page: AudioStream = preload("res://assets/sound/Next page.mp3")
 var sfx_paper_crumple: AudioStream = preload("res://assets/sound/Paper Crump.mp3")
+var sfx_buy: AudioStream = preload("res://assets/sound/buy_1.mp3")
 
-# Procedural Fallbacks for Coffee and Upgrades
+# Procedural Fallbacks for Coffee
 var coffee_serve_stream: AudioStreamWAV
-var upgrade_buy_stream: AudioStreamWAV
-
-# Keystroke alternation toggle
-var key_toggle: bool = false
 
 func _ready() -> void:
 	for i in range(max_sfx_players):
@@ -29,7 +25,7 @@ func _ready() -> void:
 		sfx_players.append(p)
 
 	# Ensure all one-shot SFX streams never loop infinitely
-	for sfx in [sfx_key_1, sfx_key_2, sfx_erro, sfx_lever, sfx_bell, sfx_next_page, sfx_paper_crumple]:
+	for sfx in [sfx_key_1, sfx_erro, sfx_lever, sfx_bell, sfx_next_page, sfx_paper_crumple, sfx_buy]:
 		if sfx is AudioStreamMP3:
 			(sfx as AudioStreamMP3).loop = false
 		elif sfx is AudioStreamWAV:
@@ -39,7 +35,6 @@ func _ready() -> void:
 
 func _generate_procedural_chimes() -> void:
 	coffee_serve_stream = _synthesize_coffee_serve()
-	upgrade_buy_stream = _synthesize_upgrade_buy()
 
 func _get_available_player() -> AudioStreamPlayer:
 	for p in sfx_players:
@@ -63,13 +58,11 @@ func play_sound(stream: AudioStream, volume_db: float = 0.0, pitch_scale: float 
 
 # --- Game Audio Triggers ---
 
-# Alternates between Keyboard Typing 1 and 2 with slight pitch variation
+# Plays Keyboard Typing 1 with natural organic pitch variation
 func play_key_clack(is_special: bool = false) -> void:
-	key_toggle = !key_toggle
-	var stream = sfx_key_1 if key_toggle else sfx_key_2
-	var pitch = randf_range(0.96, 1.05)
+	var pitch = randf_range(0.94, 1.06)
 	var vol = -2.0 if not is_special else 1.0
-	play_sound(stream, vol, pitch)
+	play_sound(sfx_key_1, vol, pitch)
 
 # Played when completing an entire word (Carriage return lever pulled)
 func play_word_lever() -> void:
@@ -101,8 +94,9 @@ func play_trash_thud() -> void:
 func play_coffee_serve() -> void:
 	play_sound(coffee_serve_stream, 1.0, 1.0)
 
+# Played when purchasing a tome upgrade
 func play_upgrade_buy() -> void:
-	play_sound(upgrade_buy_stream, 0.0, 1.0)
+	play_sound(sfx_buy, 0.0, 1.0)
 
 # Procedural chimes
 func _synthesize_coffee_serve() -> AudioStreamWAV:
